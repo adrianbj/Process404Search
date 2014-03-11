@@ -19,5 +19,6 @@ if(isset($options['q'])){
 ```
 
 You may want to enter something like the following into your 404 Page Not Found page field:
-The page you were looking for is not found.
-We have tried to find the content you were looking for, but if we didn't get it right, please use our search engine or navigation above to find the page.
+
+"The page you were looking for is not found.
+We have tried to find the content you were looking for, but if we didn't get it right, please use our search engine or navigation above to find the page."
