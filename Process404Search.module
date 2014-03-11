@@ -22,7 +22,7 @@ class Process404Search extends Process implements Module, ConfigurableModule {
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://processwire.com/talk/topic/5724-404-search-module/',
-            'version' => 4,
+            'version' => 5,
             'autoload' => true,
             'singular' => true
         );
@@ -51,7 +51,7 @@ class Process404Search extends Process implements Module, ConfigurableModule {
 
 
     public function init() {
-        $this->addHook('ProcessPageView::pageNotFound', $this, 'search');
+        $this->addHook('ProcessPageView::pageNotFound', $this, 'search', array('priority'=>1000));
     }
 
     public function search($event) {
