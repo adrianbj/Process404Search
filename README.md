@@ -15,7 +15,7 @@ Alternatively, you could use the following, to also include your "404 Page Not F
 if(isset($options['q'])){
     $input->get->q = $options['q'];
     $out .= $pages->get(27)->body;
-};
+}
 ```
 
 You may want to enter something like the following into your 404 Page Not Found page field:
