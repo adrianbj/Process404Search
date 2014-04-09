@@ -15,14 +15,14 @@
  *
  */
 
-class Process404Search extends Process implements Module, ConfigurableModule {
+class Process404Search extends WireData implements Module, ConfigurableModule {
 
     public static function getModuleInfo() {
         return array(
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://processwire.com/talk/topic/5724-404-search-module/',
-            'version' => 8,
+            'version' => 9,
             'autoload' => true,
             'singular' => true
         );
