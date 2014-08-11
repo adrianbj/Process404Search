@@ -10,7 +10,7 @@ Next, you must edit your search template (most likely search.php) and add this a
 if(isset($options['q'])) $input->get->q = $options['q'];
 ```
 
-Alternatively, you could use the following, to also include your "404 Page Not Found" page's body field. This needs to be after $out is initially defined in the search.php file:
+Alternatively, you could use the following, to also include your "404 Page Not Found" page's body field. This needs to be after $out or $body is initially defined in the search.php file:
 ```
 if(isset($options['q'])){
     $input->get->q = $options['q'];
