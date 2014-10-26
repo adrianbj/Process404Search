@@ -21,8 +21,8 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
         return array(
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
-            'href' => 'http://processwire.com/talk/topic/5724-404-search-module/',
-            'version' => 11,
+            'href' => 'http://modules.processwire.com/modules/process404-search/',
+            'version' => 12,
             'autoload' => true,
             'singular' => true,
             'icon'     => 'search'
