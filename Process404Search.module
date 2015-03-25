@@ -22,7 +22,7 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://modules.processwire.com/modules/process404-search/',
-            'version' => 12,
+            'version' => 13,
             'autoload' => true,
             'singular' => true,
             'icon'     => 'search'
@@ -60,6 +60,14 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
         $path = $request["path"];
         $result = trim(str_replace(basename($_SERVER['SCRIPT_NAME']), '', $path), '/');
         $term = str_replace(array('-','_','/','%20'),' ',$result);
+
+        // New way of setting the value of get->q directly.
+        // This way, this module can work out of the box with no need to modify the search.php template file
+        $this->input->get->q = $term;
+
+        // Setting the value for $options['q'] in the render is for backwards compatibility
+        // and as a way to identify that this module is rendering the search template so the
+        // dev can choose to output conditional content such as if(isset($options['q'])) $content .= $pages->get(27)->body;
         $event->return = $this->page->render($this->pages->get($this->searchPage)->template->filename, array('q' => $term));
     }
 
@@ -72,16 +80,14 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
 
         $fieldset = wire('modules')->get('InputfieldFieldset');
         $fieldset->label = '404 Search Results Generator';
-        $fieldset->description = 'After you choose your search page in the field below, you must edit your search template (most likely search.php) and add this as the first line:
-        if(isset($options[\'q\'])) $input->get->q = $options[\'q\'];
+        $fieldset->description = 'To make this module work, the only requirement is that you select your site\'s Search page below.
 
-        Alternatively, you could use the following, to also include your "404 Page Not Found" page\'s body field. This needs to be after $out is initially defined in the search.php file:
-        if(isset($options[\'q\'])){
-        &nbsp;&nbsp;&nbsp;&nbsp;$input->get->q = $options[\'q\'];
-        &nbsp;&nbsp;&nbsp;&nbsp;$out .= $pages->get(27)->body;
-        }
+        Optionally, you might like to add the following to your "404 Page Not Found" page\'s body field.
 
-        You may want to enter something like the following into your 404 Page Not Found page field:
+        if(isset($options[\'q\'])) $content .= $pages->get(27)->body;
+
+        That will add the content of your 404 page\'s body field to the top of the search results (27 is the ID of the PW 404 page). You might like to populate that field with something like:
+
         <h3>The page you were looking for is not found.</h3>
         <p>We have tried to find the content you were looking for, but if we didn\'t get it right, please use our search engine or navigation above to find the page.</p>';
 
