@@ -3,7 +3,7 @@ Process404Search
 
 Processwire module for loading search results into 404 page using terms from the failed URL
 
-To make this module work, the only requirement is that you select your site's Search page below.
+To make this module work, the only requirement is that you select your site's Search page in the module's config settings.
 
 Optionally, you might like to add the following to your "404 Page Not Found" page's body field.
 
