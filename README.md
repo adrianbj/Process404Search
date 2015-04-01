@@ -5,13 +5,11 @@ Processwire module for loading search results into 404 page using terms from the
 
 To make this module work, the only requirement is that you select your site's Search page in the module's config settings.
 
-Optionally, you might like to add the following to your "404 Page Not Found" page's body field.
-
+Optionally, you might like to add the following to your search.php file.
 ```
 if(isset($options['q'])) $content .= $pages->get(27)->body;
 ```
-
-That will add the content of your 404 page's body field to the top of the search results (27 is the ID of the PW 404 page). You might like to populate that field with something like:
+This will add the content of your 404 page's body field to the top of the search results (27 is the ID of the PW 404 page). You might like to populate that field with something like:
 
 ```
 <h3>The page you were looking for is not found.</h3>
