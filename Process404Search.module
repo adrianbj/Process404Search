@@ -22,7 +22,7 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://modules.processwire.com/modules/process404-search/',
-            'version' => 13,
+            'version' => 14,
             'autoload' => true,
             'singular' => true,
             'icon'     => 'search'
@@ -82,11 +82,11 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
         $fieldset->label = '404 Search Results Generator';
         $fieldset->description = 'To make this module work, the only requirement is that you select your site\'s Search page below.
 
-        Optionally, you might like to add the following to your "404 Page Not Found" page\'s body field.
+        Optionally, you might like to add the following to your search.php file.
 
         if(isset($options[\'q\'])) $content .= $pages->get(27)->body;
 
-        That will add the content of your 404 page\'s body field to the top of the search results (27 is the ID of the PW 404 page). You might like to populate that field with something like:
+        This will add the content of your 404 page\'s body field to the top of the search results (27 is the ID of the PW 404 page). You might like to populate that field with something like:
 
         <h3>The page you were looking for is not found.</h3>
         <p>We have tried to find the content you were looking for, but if we didn\'t get it right, please use our search engine or navigation above to find the page.</p>';
