@@ -22,7 +22,7 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://modules.processwire.com/modules/process404-search/',
-            'version' => 14,
+            'version' => 15,
             'autoload' => true,
             'singular' => true,
             'icon'     => 'search'
@@ -52,6 +52,8 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
 
 
     public function init() {
+        $currentUrl = explode('/', $_SERVER['REQUEST_URI']);
+        if('/'.$currentUrl[1].'/' == $this->wire('config')->urls->admin) return;
         $this->addHookAfter('ProcessPageView::pageNotFound', $this, 'search', array('priority'=>1000));
     }
 
