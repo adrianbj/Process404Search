@@ -22,7 +22,7 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://modules.processwire.com/modules/process404-search/',
-            'version' => 16,
+            'version' => 17,
             'autoload' => true,
             'singular' => true,
             'icon'     => 'search'
@@ -58,22 +58,26 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
     }
 
     public function search($event) {
-        $request = parse_url($_SERVER['REQUEST_URI']);
-        $path = $request["path"];
-        $result = trim(str_replace(basename($_SERVER['SCRIPT_NAME']), '', $path), '/');
-        $term = str_replace(array('-','_','/','%20'),' ',$result);
 
-        // New way of setting the value of get->q directly.
-        // This way, this module can work out of the box with no need to modify the search.php template file
-        $this->input->get->q = $term;
+        if($this->searchPage) {
+            $request = parse_url($_SERVER['REQUEST_URI']);
+            $path = $request["path"];
+            $result = trim(str_replace(basename($_SERVER['SCRIPT_NAME']), '', $path), '/');
+            $term = str_replace(array('-','_','/','%20'),' ',$result);
 
-        // Setting the value for $options['q'] in the render is for backwards compatibility
-        // and as a way to identify that this module is rendering the search template so the
-        // dev can choose to output conditional content such as if(isset($options['q'])) $content .= $pages->get(27)->body;
-        $templateFilename = $this->pages->get($this->searchPage)->template->filename;
-        if(file_exists($templateFilename)){
-            $event->return = $this->page->render($templateFilename, array('q' => $term));
+            // New way of setting the value of get->q directly.
+            // This way, this module can work out of the box with no need to modify the search.php template file
+            $this->input->get->q = $term;
+
+            // Setting the value for $options['q'] in the render is for backwards compatibility
+            // and as a way to identify that this module is rendering the search template so the
+            // dev can choose to output conditional content such as if(isset($options['q'])) $content .= $pages->get(27)->body;
+            $templateFilename = $this->pages->get($this->searchPage)->template->filename;
+            if(file_exists($templateFilename)) {
+                $event->return = $this->page->render($templateFilename, array('q' => $term));
+            }
         }
+
     }
 
 
