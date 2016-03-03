@@ -22,7 +22,7 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
             'title' => '404 Search Results Generator',
             'summary' => 'Load search results into 404 page using terms from the failed URL',
             'href' => 'http://modules.processwire.com/modules/process404-search/',
-            'version' => 15,
+            'version' => 16,
             'autoload' => true,
             'singular' => true,
             'icon'     => 'search'
@@ -70,7 +70,10 @@ class Process404Search extends WireData implements Module, ConfigurableModule {
         // Setting the value for $options['q'] in the render is for backwards compatibility
         // and as a way to identify that this module is rendering the search template so the
         // dev can choose to output conditional content such as if(isset($options['q'])) $content .= $pages->get(27)->body;
-        $event->return = $this->page->render($this->pages->get($this->searchPage)->template->filename, array('q' => $term));
+        $templateFilename = $this->pages->get($this->searchPage)->template->filename;
+        if(file_exists($templateFilename)){
+            $event->return = $this->page->render($templateFilename, array('q' => $term));
+        }
     }
 
 
