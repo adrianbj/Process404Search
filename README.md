@@ -16,6 +16,10 @@ This will add the content of your 404 page's body field to the top of the search
 <p>We have tried to find the content you were looking for, but if we didn't get it right, please use our search engine or navigation above to find the page.</p>
 ```
 
+####Support forum:
+http://processwire.com/talk/topic/5724-404-search-module/
+
+
 ## License
 
 This program is free software; you can redistribute it and/or
